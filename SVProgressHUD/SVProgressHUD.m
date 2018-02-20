@@ -132,7 +132,7 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
 
 + (void)setForegroundColor:(UIColor*)color {
     [self sharedView].foregroundColor = color;
-    [self setDefaultStyle:SVProgressHUDStyleCustom];
+    //[self setDefaultStyle:SVProgressHUDStyleCustom];
 }
 
 + (void)setBackgroundColor:(UIColor*)color {
@@ -1162,13 +1162,14 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
 }
 
 - (UIColor*)foregroundColorForStyle {
-    if(self.defaultStyle == SVProgressHUDStyleLight) {
-        return [UIColor blackColor];
-    } else if(self.defaultStyle == SVProgressHUDStyleDark) {
-        return [UIColor whiteColor];
-    } else {
-        return self.foregroundColor;
-    }
+//    if(self.defaultStyle == SVProgressHUDStyleLight) {
+//        return [UIColor blackColor];
+//    } else if(self.defaultStyle == SVProgressHUDStyleDark) {
+//        return [UIColor whiteColor];
+//    } else {
+//        return self.foregroundColor;
+//    }
+    return self.foregroundColor;
 }
 
 - (UIColor*)backgroundColorForStyle {
@@ -1415,7 +1416,15 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
 #pragma mark - UIAppearance Setters
 
 - (void)setDefaultStyle:(SVProgressHUDStyle)style {
-    if (!_isInitializing) _defaultStyle = style;
+  if (!_isInitializing) {
+    _defaultStyle = style;
+    
+    if (_defaultStyle == SVProgressHUDStyleLight) {
+      _foregroundColor = [UIColor blackColor];
+    } else if (_defaultStyle == SVProgressHUDStyleDark) {
+      _foregroundColor = [UIColor whiteColor];
+    }
+  }
 }
 
 - (void)setDefaultMaskType:(SVProgressHUDMaskType)maskType {
